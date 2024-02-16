@@ -19,20 +19,12 @@ public class Arrays extends PApplet
 		return d + (howFar / r1) * r2;
 	}
 
-	void randomize()
-	{
-		for (int i = 0; i < rainfall.length; i++) {
-			rainfall[i] = random(500);
-		}
-	}
-
 	public void settings()
 	{
 		size(500, 500);
 
 		String[] m1 = months;
-		months[0] = "XXX";
-		print(m1[0]);
+
 		for(int i = 0; i < months.length; i ++)
 		{
 			println("Month: " + months[i] + "\t" + rainfall[i]);
@@ -86,22 +78,57 @@ public class Arrays extends PApplet
 
 	public void setup() {
 		colorMode(HSB);
-		background(0);
-		randomize();
-		
-		
+		background(0);	
+	}
+	int mode = 0;
+
+	public void keyPressed() {
+		if (key >= '0' && key <= '3') {
+			mode = key - '0';
+		}
+		println(mode);
 	}
 
 	
 	public void draw()
 	{	
-
 		background(0);
-		float w = width / (float)months.length;
-		for(int i = 0 ; i < months.length ;  i ++)
-		{
-			float x = map1(i, 0, months.length, 0, width);
-			rect(x, height, w, -rainfall[i]);
+		switch (mode) {
+			//bar chart
+			case 1: 
+				// Draw X-axis
+				stroke(255);
+				line(30, height-30, width-30, height-30); 
+				
+				// Draw Y-axis
+				line(30, 30, 30, height-30); 
+				float w = (width - 60) / (float)months.length; 
+				for (int i = 0; i < months.length; i++) {
+					float x = map(i, 0, months.length, 30, width - 30); 
+					float y = map(rainfall[i], 0, max(rainfall), height - 30, 30);  
+					//rainbow colours for bars
+					float hue = map(i, 0, 16, 0, 300); 
+					colorMode(HSB);
+					fill(hue, 255, 255);
+					rect(x, y, w, height - 30 - y);
+					//labels for months
+					fill(255);
+					textAlign(CENTER, TOP);
+					text(months[i], x + w/2, height - 20);
+
+				}
+				//labels for y-axis(from 0 to 500)
+				textAlign(RIGHT, CENTER);
+					for (int j = 0; j <= 500; j += 50) {
+						float yPos = map1(j, 0, 500, height - 30, 30);  
+						line(25, yPos, 30, yPos);  
+						text(Integer.toString(j), 25, yPos); 
+					}
+			//trend line chart
+			case 2:
+				
+			//pie chart
+
 		}
 	}
 }
