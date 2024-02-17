@@ -168,7 +168,26 @@ public class Arrays extends PApplet
 				break;
 
 			//pie chart
+			case 3:
 
+				colorMode(HSB);
+
+				//total value of all rainfall
+				float tot = 0;
+				for(float f:rainfall)
+				{
+					tot += f;
+				}
+
+				//drawing pie chart with rainbow hues
+				float totalAngle = 0;
+				for (int i = 0; i < months.length; i++) {
+					float angle = map(rainfall[i], 0, tot, 0, TWO_PI);
+					float hue = map(i, 0, months.length, 0, 255);
+					fill(hue, 255, 255);
+					arc(width / 2, height / 2, 300, 300, totalAngle, totalAngle + angle);
+					totalAngle += angle;
+				}
 
 
 		}
