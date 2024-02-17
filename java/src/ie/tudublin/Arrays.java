@@ -120,14 +120,56 @@ public class Arrays extends PApplet
 				//labels for y-axis(from 0 to 500)
 				textAlign(RIGHT, CENTER);
 					for (int j = 0; j <= 500; j += 50) {
-						float yPos = map1(j, 0, 500, height - 30, 30);  
-						line(25, yPos, 30, yPos);  
-						text(Integer.toString(j), 25, yPos); 
+						float yPosition = map1(j, 0, 500, height - 30, 30);  
+						line(25, yPosition, 30, yPosition);  
+						text(Integer.toString(j), 25, yPosition); 
 					}
+				break;
+
 			//trend line chart
+
 			case 2:
+				// Draw X-axis
+				colorMode(HSB);
+				stroke(255);
+				line(30, height-30, width-30, height-30); 
 				
+				// Draw Y-axis
+				line(30, 30, 30, height-30); 
+
+				//labels for months
+				float m = (width - 60) / (float) months.length;
+				for (int i = 0; i < months.length; i++) {
+					float x = map(i, 0, months.length, 30, width - 30);
+					fill(255);
+					textAlign(CENTER, TOP);
+					text(months[i], x + m/2, height - 20);
+				}
+
+				//trend line on the x-y graph  
+    
+				for (int i = 0; i < months.length - 1; i++) {
+					float x1 = map1(i, 0, months.length, 30, width - 30);
+					float y1 = map1(rainfall[i], 0, max(rainfall), height - 30, 30);
+				
+					float x2 = map1(i + 1, 0, months.length, 30, width - 30);
+					float y2 = map1(rainfall[i + 1], 0, max(rainfall), height - 30, 30);
+			
+					line(x1, y1, x2, y2);
+				}
+
+				//labels for y-axis(from 0 to 500)
+				textAlign(RIGHT, CENTER);
+				for (int j = 0; j <= 500; j += 50) {
+					float yPosition = map1(j, 0, 500, height - 30, 30);  
+					line(25, yPosition, 30, yPosition);  
+					text(Integer.toString(j), 25, yPosition); 
+				}
+				break;
+
 			//pie chart
+
+
 
 		}
 	}
