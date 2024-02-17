@@ -8,7 +8,7 @@ public class Arrays extends PApplet
 {
 	String[] months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
 
-	float[] rainfall = {200, 260, 300, 150, 100, 50, 10, 40, 67, 160, 400, 420};
+	float[] rainfall = {200, 260, 300, 150, 100, 70, 50, 90, 67, 160, 400, 420};
 
 	public float map1(float a, float b, float c, float d, float e)
 	{
@@ -94,6 +94,7 @@ public class Arrays extends PApplet
 	{	
 		background(0);
 		switch (mode) {
+
 			//bar chart
 			case 1: 
 				// Draw X-axis
@@ -172,7 +173,7 @@ public class Arrays extends PApplet
 
 				colorMode(HSB);
 
-				//total value of all rainfall
+				//total value of all rainfall from all months
 				float tot = 0;
 				for(float f:rainfall)
 				{
@@ -187,9 +188,18 @@ public class Arrays extends PApplet
 					fill(hue, 255, 255);
 					arc(width / 2, height / 2, 300, 300, totalAngle, totalAngle + angle);
 					totalAngle += angle;
+
+
+					// Draw labels next to each slice
+
+					float xPos = width / 2 + cos(totalAngle + angle / 2) * 180;  
+					float yPos = height / 2 + sin(totalAngle + angle / 2) * 180;  
+
+					textAlign(CENTER, CENTER);
+					fill(255);
+					text(months[i], xPos, yPos);
 				}
-
-
+				break;
 		}
 	}
 }
