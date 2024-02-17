@@ -86,7 +86,6 @@ public class Arrays extends PApplet
 		if (key >= '0' && key <= '3') {
 			mode = key - '0';
 		}
-		println(mode);
 	}
 
 	
@@ -94,6 +93,15 @@ public class Arrays extends PApplet
 	{	
 		background(0);
 		switch (mode) {
+
+			//instructions 
+			case 0: 
+				colorMode(HSB);
+				textAlign(TOP, RIGHT);
+				text("Enter 1 to see bar chart", 50, 200); 
+				text("Enter 2 to see trend line chart", 50, 300); 
+				text("Enter 3 to see pie chart", 50, 400); 
+				break;
 
 			//bar chart
 			case 1: 
